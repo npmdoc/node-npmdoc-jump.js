@@ -1,0 +1,149 @@
+<html><head></head><body><div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a href="https://github.com/callmecavs/jump.js#readme">jump.js (v1.0.2)</a>
+</h1>
+<h4>A modern smooth scrolling library.</h4>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.jump.js">module jump.js</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.jump.js.js">
+            function <span class="apidocSignatureSpan">jump.</span>js
+            <span class="apidocSignatureSpan">(target)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.jump.js" id="apidoc.module.jump.js">module jump.js</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.jump.js.js" id="apidoc.element.jump.js.js">
+        function <span class="apidocSignatureSpan">jump.</span>js
+        <span class="apidocSignatureSpan">(target)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function jump(target) {
+  var options = arguments.length &gt; 1 &amp;&amp; arguments[1] !== undefined ? arguments[1] : {};
+
+  // resolve options, or use defaults
+  duration = options.duration || 1000;
+  offset = options.offset || 0;
+  callback = options.callback; // "undefined" is a suitable default, and won't be called
+  easing = options.easing || easeInOutQuad;
+  a11y = options.a11y || false;
+
+  // cache starting position
+  start = location();
+
+  // resolve target
+  switch (typeof target === 'undefined' ? 'undefined' : _typeof(target)) {
+    // scroll from current position
+    case 'number':
+      element = undefined; // no element to scroll to
+      a11y = false; // make sure accessibility is off
+      stop = start + target;
+      break;
+
+    // scroll to element (node)
+    // bounding rect is relative to the viewport
+    case 'object':
+      element = target;
+      stop = top(element);
+      break;
+
+    // scroll to element (selector)
+    // bounding rect is relative to the viewport
+    case 'string':
+      element = document.querySelector(target);
+      stop = top(element);
+      break;
+  }
+
+  // resolve scroll distance, accounting for offset
+  distance = stop - start + offset;
+
+  // resolve duration
+  switch (_typeof(options.duration)) {
+    // number in ms
+    case 'number':
+      duration = options.duration;
+      break;
+
+    // function passed the distance of the scroll
+    case 'function':
+      duration = options.duration(distance);
+      break;
+  }
+
+  // start the loop
+  window.requestAnimationFrame(loop);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
+</body></html>
